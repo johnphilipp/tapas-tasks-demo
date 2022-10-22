@@ -1,4 +1,4 @@
 # tapas-tasks-demo
 
 How to run:
-`streamlit run app`
+`streamlit run app.py`
