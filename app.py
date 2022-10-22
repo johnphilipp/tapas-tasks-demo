@@ -1,9 +1,6 @@
-from multiprocessing import allow_connection_pickling
-from turtle import width
 import streamlit as st
 from post_task import post_task
 from get_task import get_task
-from PIL import Image
 
 
 st.markdown("""<a style="display:inline; margin-right: 24px; font-weight: bold; font-size: 2.2em;">Tapas Tasks Demo</a><img src="https://raw.githubusercontent.com/johnphilipp/tapas-tasks-demo/main/qrcode.png" alt="QR Code" style="width:90px; height:90px; display:inline;"></img><br><br>""", unsafe_allow_html=True)
