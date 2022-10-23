@@ -10,7 +10,7 @@ taskType = st.selectbox("Task type", ["computation", "weather"])
 if taskType == "computation":
     inputData = st.text_input('Input data (e.g., " 3.5 * sqrt(27) ")')
 elif taskType == "weather":
-    inputData = st.text_input('Input data (e.g., " Zurich ")')
+    inputData = st.text_input('Input data (e.g., " St. Gallen ")')
 btn = st.button('Submit request')
 st.markdown("#")
 
@@ -31,7 +31,10 @@ if btn:
             if result_get.status_code == 200:
                 result_get = result_get.json()
                 if result_get["taskType"] == "computation":
-                    if "outputData" not in result_get.keys():
+                    if result_get["taskStatus"] == "RUNNING":
+                        st.warning("Your request is still running. Please check {} for updates".format(
+                            result_get["inputData"]))
+                    elif "outputData" not in result_get.keys():
                         # TODO
                         st.warning(
                             "Sorry, we could not perform this calculation")
@@ -40,7 +43,12 @@ if btn:
                             result_get["inputData"], result_get["outputData"]))
                         st.write(result_get)
                 elif result_get["taskType"] == "weather":
-                    if "java.lang.Object" in result_get["outputData"]:
+                    if result_get["taskStatus"] == "RUNNING":
+                        st.warning("Your request is still running. Please check {} for updates".format(
+                            result_get["inputData"]))
+                    # if "outputData" not in result_get.keys():
+                    #     st.warning("Your request is still running. Please check {} for updates".format(result_get["inputData"]))
+                    elif "java.lang.Object" in result_get["outputData"]:
                         # TODO
                         st.warning("Sorry, we could not find this city")
                     else:
