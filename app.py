@@ -45,7 +45,7 @@ if btn:
                             result_get["inputData"], result_get["outputData"]))
                         st.write(result_get)
                 elif result_get["taskType"] == "weather":
-                    if result_get["taskStatus"] == "RUNNING":
+                    if result_get["taskStatus"] != "EXECUTED":
                         st.warning("Your request is still running. Please check {} for updates".format(
                             result_post.headers["Location"]))
                     # if "outputData" not in result_get.keys():
