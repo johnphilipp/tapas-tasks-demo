@@ -33,9 +33,11 @@ if btn:
                 if result_get["taskType"] == "computation":
                     if result_get["taskStatus"] == "RUNNING":
                         st.warning("Your request is still running. Please check {} for updates".format(
-                            result_get["inputData"]))
+                            result_post.headers["Location"]))
                     elif "outputData" not in result_get.keys():
-                        # TODO
+                        st.warning(
+                            "Sorry, we could not perform this calculation")
+                    elif result_get["taskStatus"] == "EXECUTED" and result_get["outputData"] == "FAILED":
                         st.warning(
                             "Sorry, we could not perform this calculation")
                     else:
@@ -45,7 +47,7 @@ if btn:
                 elif result_get["taskType"] == "weather":
                     if result_get["taskStatus"] == "RUNNING":
                         st.warning("Your request is still running. Please check {} for updates".format(
-                            result_get["inputData"]))
+                            result_post.headers["Location"]))
                     # if "outputData" not in result_get.keys():
                     #     st.warning("Your request is still running. Please check {} for updates".format(result_get["inputData"]))
                     elif "java.lang.Object" in result_get["outputData"]:
